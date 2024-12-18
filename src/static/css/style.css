@@ -34,6 +34,14 @@ html {
 
 
 
+/* ui */
+
+
+#slider{
+    position: relative;
+}
+
+
 .image-group {
     display: flex;
 }
@@ -61,6 +69,7 @@ html {
 
 #images .image {
     margin: 0 auto;
+    text-align: center;
 }
 
 .image-animate-pre{
@@ -74,7 +83,7 @@ html {
 
 @keyframes imageMovePre {
     from {
-        right: 50rem;
+        right: 70rem;
         opacity: .5;
     }
 
@@ -86,7 +95,7 @@ html {
 
 @keyframes imageMoveNext {
     from {
-        left: 50rem;
+        left: 70rem;
         opacity: .5;
     }
 

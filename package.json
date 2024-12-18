@@ -1,0 +1,27 @@
+{
+  "name": "image-slider",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx tsc --watch",
+    "prelive": "npx tsc",
+    "live": "npx live-server",
+    "compile": "tsc",
+    "prebuild":"npm run clear-dist",
+    "build": "parcel build src/index.html",
+    "start": "parcel src/index.html",
+    "clear-dist":"rm -rf dist && mkdir dist",
+    "copy-static": "cp -r src/static/* dist",
+    "super":"npm run build && npm run start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "parcel": "^2.13.3",
+    "parcel-plugin-static-files-copy": "^2.6.0",
+    "typescript": "^5.7.2"
+  }
+}
