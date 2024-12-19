@@ -5,16 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.min.css">
     <title>Image Slider</title>
 </head>
 
 <body>
+
     <div class="container">
+        <div id="slider-options">
+            <div>
+                <label for="slide">Slide</label>
+                <input type="radio" name="slide" id="slider">
+            </div>
+    
+            <div>
+                <label for="slide">Fade</label>
+                <input type="radio" name="fade" id="slider2">
+            </div>
+    
+        </div>
 
         <div id="slider"></div>
 
     </div>
 
+    <script type="text/javascript" src="https://unpkg.com/default-passive-events"></script>
     <script type="module" src="slider/slider.ts"></script>
     <script type="module" src="slider/app.ts"></script>
     

@@ -6,6 +6,7 @@
 
 html {
     font-size: 10px;
+    overflow-x: hidden;
 }
 
 .container {
@@ -20,11 +21,14 @@ html {
     padding: .5rem 1rem;
     margin: .7rem;
     text-align: center;
-
     display: inline-block;
     width: 10rem;
     font-size: 1.8rem;
     padding: 1rem;
+}
+
+.btn:hover {
+    cursor: pointer;
 }
 
 .btn-primary {
@@ -33,31 +37,39 @@ html {
 }
 
 
+.btn.reset {
+    width: 21.4rem;
+}
+
 
 /* ui */
 
 
-#slider{
-    position: relative;
+#slider {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 
 .image-group {
     display: flex;
+    overflow: hidden;
+    width: 100%;
 }
 
+
 .image-group .image {
+    margin: 0 auto;
+    text-align: center;
     padding: 1rem;
-    margin: 1rem;
+    cursor: grab;
 }
 
 .image-group img {
     max-width: 100%;
-    display: none;
-}
-
-.button-group {
-    text-align: center;
+    transform-origin: center center;
+    height: auto;
 }
 
 
@@ -67,16 +79,12 @@ html {
 
 }
 
-#images .image {
-    margin: 0 auto;
-    text-align: center;
-}
 
-.image-animate-pre{
+.image-animate-pre {
     animation: imageMovePre 1.2s
 }
 
-.image-animate-next{
+.image-animate-next {
     animation: imageMoveNext 1.2s;
 }
 
