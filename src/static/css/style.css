@@ -128,7 +128,13 @@ html {
     }
 }
 
+#reset-button{
+    text-align: center;
+}
 
+#buttons{
+    text-align: center;
+}
 
 
 .option-menu{

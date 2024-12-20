@@ -41,15 +41,14 @@ export class Slider {
     resetPanButton: HTMLButtonElement | null;
 
 
-    constructor(imageList: ImageModel[]) {
+    constructor(selector: string, imageList: ImageModel[]) {
+        this.sliderElement = document.querySelector(selector);
+
         this.imageList = imageList;
         this.createElements();
     }
 
     createElements() {
-        this.sliderElement = document.getElementById("slider");
-        console.log(this.sliderElement);
-
         //resetPanButton
         this.resetPanButton = document.createElement("button");
         this.resetPanButton.className = "btn btn-primary reset";

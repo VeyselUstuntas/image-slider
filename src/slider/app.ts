@@ -20,7 +20,7 @@ export class App {
         ];
 
         this.images = images;
-        this.slider = new Slider(images);
+        this.slider = new Slider('.slider',images);
 
     }
 
