@@ -56,6 +56,7 @@ html {
     display: flex;
     overflow: hidden;
     width: 100%;
+    border: .4rem solid #E76F51;
 }
 
 
@@ -80,16 +81,20 @@ html {
 }
 
 
-.image-animate-pre {
-    animation: imageMovePre 1.2s
+.image-animate-slide-pre {
+    animation: imageSlideMovePre 1.2s
 }
 
-.image-animate-next {
-    animation: imageMoveNext 1.2s;
+.image-animate-slide-next {
+    animation: imageSlideMoveNext 1.2s;
+}
+
+.image-animate-fade{
+    animation: imageFadeMove 1.2s;
 }
 
 
-@keyframes imageMovePre {
+@keyframes imageSlideMovePre {
     from {
         right: 70rem;
         opacity: .5;
@@ -101,7 +106,7 @@ html {
     }
 }
 
-@keyframes imageMoveNext {
+@keyframes imageSlideMoveNext {
     from {
         left: 70rem;
         opacity: .5;
@@ -111,4 +116,50 @@ html {
         left: 0rem;
         opacity: 1;
     }
+}
+
+@keyframes imageFadeMove {
+    from {
+        opacity: .5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+
+
+.option-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    margin: 1rem 0;
+    background-color: #a9a9a9;
+}
+
+#slider-options label{
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+#slider-options > div{
+    margin: 0 1rem;
+}
+
+#image-move-options label{
+    font-size: 2.2rem;
+    font-weight: 400;
+}
+
+#image-move-options > div{
+    margin: 0 1rem;
+}
+
+#image-move-options p{
+    font-size: 2.2rem;
+    font-weight: 400;
 }

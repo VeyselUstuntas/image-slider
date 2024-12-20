@@ -10,6 +10,7 @@ export class App {
     private images: ImageModel[];
     private slider: Slider;
 
+
     constructor() {
         const images = [
             { id: 1, img: img1 },
@@ -24,7 +25,7 @@ export class App {
     }
 
     runApp() {
-        this.slider.loadImage(this.images[3].id, null);
+        this.slider.loadImage(this.images[0].id, null);
     }
 }
 

@@ -12,27 +12,40 @@
 <body>
 
     <div class="container">
-        <div id="slider-options">
+        <div id="slider-options" class="option-menu">
             <div>
-                <label for="slide">Slide</label>
-                <input type="radio" name="slide" id="slider">
+                <label for="slide" class="slide-option">Slide</label>
+                <input type="radio" name="slider" id="slide" value="1" checked>
             </div>
-    
+
             <div>
-                <label for="slide">Fade</label>
-                <input type="radio" name="fade" id="slider2">
+                <label for="fade" class="fade-option">Fade</label>
+                <input type="radio" name="slider" id="fade" value="0">
             </div>
-    
+
+        </div>
+
+        <div id="image-move-options" class="option-menu">
+            <p>Image Move Status</p>
+            <div>
+                <label for="move-on" class="slide-option">On</label>
+                <input type="radio" name="move" id="move-on" value="1">
+            </div>
+
+            <div>
+                <label for="move-off" class="fade-option">Off</label>
+                <input type="radio" name="move" id="move-off" value="0" checked>
+            </div>
+
         </div>
 
         <div id="slider"></div>
 
     </div>
 
-    <script type="text/javascript" src="https://unpkg.com/default-passive-events"></script>
     <script type="module" src="slider/slider.ts"></script>
     <script type="module" src="slider/app.ts"></script>
-    
+
 </body>
 
 </html>

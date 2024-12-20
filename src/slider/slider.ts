@@ -26,6 +26,8 @@ export class Slider {
     startX = 0;
     startY = 0;
     panning = false;
+    moveStatus = false;
+    sliderStatus = true;
 
 
     sliderElement: HTMLElement | null;
@@ -68,10 +70,10 @@ export class Slider {
         // image div element
         this.imageElement = document.createElement("div");
         this.imageElement.className = "image";
-        this.imageElement.addEventListener("wheel", this.imageZoom.bind(this), { passive: false });
-        this.imageElement.addEventListener("mousedown", this.onMouseDown.bind(this), { passive: false });
-        this.imageElement.addEventListener("mouseup", this.onMouseUp.bind(this), { passive: false });
-        this.imageElement.addEventListener("mousemove", this.onMouseMove.bind(this), { passive: false });
+        this.imageElement.addEventListener("wheel", this.imageZoom.bind(this));
+        this.imageElement.addEventListener("mousedown", this.onMouseDown.bind(this));
+        this.imageElement.addEventListener("mouseup", this.onMouseUp.bind(this));
+        this.imageElement.addEventListener("mousemove", this.onMouseMove.bind(this));
 
 
         // img
@@ -106,6 +108,13 @@ export class Slider {
         this.sliderElement?.appendChild(this.resetButtonsElement);
         this.sliderElement?.appendChild(this.buttonsElement);
 
+        //change image move status
+        this.changeImageMoveStatus();
+
+        //change slider type
+        this.changeSliderType();
+
+
     }
 
     loadImage(imageIndex: number, imagePosition: string | null) {
@@ -122,7 +131,7 @@ export class Slider {
         if (newImageId <= 0) {
             newImageId = this.imageList.length;
         }
-        this.loadImage(newImageId, "image-animate-pre");
+        this.loadImage(newImageId, this.sliderStatus === true ? "image-animate-slide-pre" : "image-animate-fade");
     }
 
     goToNextSlide(ev: Event) {
@@ -131,7 +140,7 @@ export class Slider {
         if (newImageId >= this.imageList.length + 1) {
             newImageId = 1;
         }
-        this.loadImage(newImageId, "image-animate-next");
+        this.loadImage(newImageId, this.sliderStatus === true ? "image-animate-slide-next" : "image-animate-fade");
 
     }
 
@@ -155,8 +164,8 @@ export class Slider {
     };
 
     imageZoom(ev: WheelEvent) {
+        const deltaY = ev.deltaY * -1;
         console.log(ev.deltaY);
-        const deltaY = ev.deltaY;
         ev.preventDefault();
         var func = this.imageElement!.onwheel;
         this.imageElement!.onwheel = null;
@@ -178,18 +187,25 @@ export class Slider {
     }
 
     onMouseUp(ev: MouseEvent) {
+        ev.preventDefault();
         this.panning = false;
         this.imageElement!.style.cursor = "grab";
+        console.log("bırakılan yer: ", ev.clientX);
+
+        this.swipeChangeImage(ev);
     }
 
     onMouseDown(ev: MouseEvent) {
         ev.preventDefault();
         this.panning = true;
-        this.imageElement!.style.cursor = 'grabbing';
+        this.imageElement!.style.cursor = "grabbing";
         this.mouseX = ev.clientX;
         this.mouseY = ev.clientY;
         this.mouseTX = this.ts.translate.x;
         this.mouseTY = this.ts.translate.y;
+
+        console.log("tutulan yer: ", this.mouseX);
+        console.log("TX: ", this.ts.translate.x);
 
     }
 
@@ -204,7 +220,9 @@ export class Slider {
         this.ts.translate.x = this.mouseTX + (x - this.mouseX);
         this.ts.translate.y = this.mouseTY + (y - this.mouseY);
 
-        this.setTransform();
+        if (this.moveStatus) {
+            this.setTransform();
+        }
     }
 
 
@@ -222,5 +240,45 @@ export class Slider {
         };
         this.imageElement!.style.transform = 'none';
     }
+
+
+    changeImageMoveStatus() {
+        const imageMoveStatus = document.getElementsByName("move") as NodeListOf<HTMLInputElement>;
+        Array.from(imageMoveStatus).forEach(option => {
+            option.addEventListener("change", () => {
+                const selectedOption = Array.from(imageMoveStatus).find(r => r.checked)?.value;
+                this.moveStatus = selectedOption === "1" ? true : false;
+                console.log(this.moveStatus);
+            });
+        });
+
+    }
+
+    changeSliderType() {
+        const sliderType = document.getElementsByName("slider") as NodeListOf<HTMLInputElement>;
+        Array.from(sliderType).forEach(option => {
+            option.addEventListener("change", () => {
+                const selectedOption = Array.from(sliderType).find(r => r.checked)?.value;
+                this.sliderStatus = selectedOption === "1" ? true : false;
+                console.log(this.sliderStatus);
+            })
+        })
+    }
+
+    swipeChangeImage(ev: Event) {
+        ev.preventDefault();
+        if (!this.moveStatus) {
+            let slideDirect = this.ts.translate.x;
+            if (Math.abs(slideDirect) > 35) {
+                if (slideDirect < 0) {
+                    this.goToNextSlide(ev);
+                }
+                else {
+                    this.goToPreSlide(ev);
+                }
+            }
+        }
+    }
+
 
 }
